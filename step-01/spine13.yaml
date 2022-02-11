@@ -1,0 +1,31 @@
+- set:
+    interface:
+      lo:
+        ip:
+          address:
+            172.16.100.13/32: {}
+        type: loopback
+      swp1:
+        type: swp
+      swp2:
+        type: swp
+      swp5:
+        type: swp
+    router:
+      bgp:
+        autonomous-system: 65101
+        enable: on
+        router-id: 172.16.100.13
+    system:
+      hostname: spine13
+    vrf:
+      default:
+        router:
+          bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  172.16.100.13/32: {}
+            enable: on
+            neighbor:
