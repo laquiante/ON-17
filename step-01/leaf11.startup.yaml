@@ -1,0 +1,38 @@
+- set:
+    bridge:
+      domain:
+        br_default:
+          vlan:
+            '10': {}
+            '74': {}
+    interface:
+      swp1:
+        description: to spine13
+        type: swp
+      swp2:
+        description: to spine14
+        type: swp
+      swp4:
+        description: to extrouter11
+        type: swp
+      swp4.20:
+        base-interface: swp4
+        ip:
+          address:
+            172.16.20.2/30: {}
+          vrf: vrf20
+        type: sub
+        vlan: 20
+      swp4.21:
+        base-interface: swp4
+        ip:
+          address:
+            172.16.21.2/30: {}
+          vrf: vrf21
+        type: sub
+        vlan: 21
+      swp4.22:
+        base-interface: swp4
+        ip:
+          address:
+            172.16.22.2/30: {}
