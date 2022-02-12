@@ -7,7 +7,7 @@
   tasks:
     - name: create initial startup.yaml
       copy:
-        src: /home/cumulus/ON-17/step-01/{{ inventory_hostname }}.yaml
+        src: /home/ubuntu/ON-17/step-01/{{ inventory_hostname }}.yaml
         dest: /etc/nvue.d/startup.yaml
     # aktivieren
     - name: apply
