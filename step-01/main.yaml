@@ -1,14 +1,14 @@
 # quick and dirty on a friday evening
 
-- hosts: switches
+- hosts: cumulus-nodes
   name: startup
   become: yes
   gather_facts: no
   tasks:
-    - name: copy startup.yaml
+    - name: create initial startup.yaml
       copy:
         src: /home/cumulus/ON-17/step-01/{{ inventory_hostname }}.yaml
         dest: /etc/nvue.d/startup.yaml
     # aktivieren
-    - name: activate changes for leaf
+    - name: apply
       shell:  nv config apply startup -y
