@@ -1,41 +1,42 @@
-#192.168.200.17 oob-mgmt-switch
-#192.168.200.2 leaf11
-#192.168.200.3 leaf12
-#192.168.200.4 spine13
-#192.168.200.5 spine14
-#192.168.200.6 customer11
-#192.168.200.7 extrouter11
-#192.168.200.9 leaf21
-#192.168.200.10 leaf22
-#192.168.200.11 spine23
-#192.168.200.12 spine24
-#192.168.200.13 extrouter22
-#192.168.200.15 wan01
-#192.168.200.16 wan02
+
+
 #192.168.200.8 host11
 #192.168.200.14 host22
 
 
 [oob-switch]
-oob-mgmt-switch ansible_host=192.168.200.10
+oob-mgmt-switch ansible_host=192.168.200.17
 
 [leaf]
-leaf1 ansible_host=192.168.200.2
-leaf2 ansible_host=192.168.200.3
+leaf11 ansible_host=192.168.200.2
+leaf12 ansible_host=192.168.200.3
+leaf21 ansible_host=192.168.200.9
+leaf22 ansible_host=192.168.200.10
 
 [spine]
-spine3 ansible_host=192.168.200.4
-spine4 ansible_host=192.168.200.5
+spine13 ansible_host=192.168.200.4
+spine14 ansible_host=192.168.200.5
+spine23 ansible_host=192.168.200.11
+spine24 ansible_host=192.168.200.12
+
+[ext]
+customer11 ansible_host=192.168.200.6
+extrouter11 ansible_host=192.168.200.7
+extrouter22 ansible_host=192.168.200.13
+wan01 ansible_host=192.168.200.15
+wan02 ansible_host=192.168.200.16
 
 [host]
-host1 ansible_host=192.168.200.6
-host2 ansible_host=192.168.200.7
-host3 ansible_host=192.168.200.8
-host4 ansible_host=192.168.200.9
+host11 ansible_host=192.168.200.8
+host22 ansible_host=192.168.200.14
+ansible_user=ubuntu
+ansible_become_pass=nvidia
+ansible_ssh_pass=nvidia
 
 [cumulus-nodes:children]
 leaf
 spine
+ext
 
 [nodes:children]
 cumulus-nodes
@@ -43,6 +44,6 @@ host
 
 [all:vars]
 ansible_user=cumulus
-ansible_become_pass=Academy123
-ansible_ssh_pass=Academy123
+ansible_become_pass=cumulus
+ansible_ssh_pass=cumulus
 test_var=test
