@@ -1,6 +1,7 @@
 # quick and dirty on a friday evening
 
-- hosts: cumulus-nodes
+#- hosts: cumulus-nodes
+- hosts: leaf12
   name: startup
   become: yes
   gather_facts: no
