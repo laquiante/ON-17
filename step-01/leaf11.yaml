@@ -1,6 +1,7 @@
 - set:
     system:
       hostname: leaf11
+    bridge:
       domain:
         br_default:
           vlan:
