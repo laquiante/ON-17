@@ -1,5 +1,10 @@
 - set:
+    system:
+      hostname: leaf11
     bridge:
+- set:
+    system:
+      hostname: leaf11
       domain:
         br_default:
           vlan:
