@@ -1,3 +1,5 @@
-- set
-    system:
-      hostname: leaf12
+- set:
+    interface:
+      swp1-2,8:
+        type: swp
+
