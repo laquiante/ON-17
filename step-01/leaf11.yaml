@@ -1,40 +1,65 @@
 - set:
-    system:
-      hostname: leaf11
     bridge:
       domain:
         br_default:
           vlan:
             '10': {}
             '74': {}
+    router:
+      bgp:
+        autonomous-system: 65111
+        enable: on
+        router-id: 172.16.100.11
+    system:
+      hostname: leaf11
+    vrf:
+      default:
+        router:
+          bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  172.16.100.11/32: {}
+            enable: on
+            neighbor:
+              swp1:
+                remote-as: external
+                type: unnumbered
+              swp2:
+                remote-as: external
+                type: unnumbered
     interface:
+      lo:
+        ip:
+          address:
+            172.16.100.11/32: {}
+        type: loopback
       swp1:
         description: to spine13
+      swp1-2,4:
         type: swp
       swp2:
         description: to spine14
-        type: swp
       swp4:
         description: to extrouter11
-        type: swp
-      swp4.20:
+      swp4.20-22:
         base-interface: swp4
+        type: sub
+      swp4.20:
         ip:
           address:
             172.16.20.2/30: {}
           vrf: vrf20
-        type: sub
         vlan: 20
       swp4.21:
-        base-interface: swp4
         ip:
           address:
             172.16.21.2/30: {}
           vrf: vrf21
-        type: sub
         vlan: 21
       swp4.22:
-        base-interface: swp4
         ip:
           address:
             172.16.22.2/30: {}
+        vlan: 22
