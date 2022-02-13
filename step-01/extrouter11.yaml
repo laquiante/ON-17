@@ -8,8 +8,17 @@
       hostname: extrouter11
     vrf:
       vrf20:
+        loopback:
+          ip:
+            address:
+              10.0.20.1/24: {}
         router:
           bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  10.0.20.0/24: {}
             enable: on
             neighbor:
               172.16.20.2:
@@ -17,8 +26,17 @@
                 type: numbered
         table: auto
       vrf21:
+        loopback:
+          ip:
+            address:
+              10.0.21.1/24: {}
         router:
           bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  10.0.21.0/24: {}
             enable: on
             neighbor:
               172.16.21.2:
@@ -26,8 +44,17 @@
                 type: numbered
         table: auto
       vrf22:
+        loopback:
+          ip:
+            address:
+              10.0.22.1/24: {}
         router:
           bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  10.0.22.0/24: {}
             enable: on
             neighbor:
               172.16.22.2:
