@@ -1,1 +1,4 @@
 
+- set:
+    system:
+      hostname: wan02
