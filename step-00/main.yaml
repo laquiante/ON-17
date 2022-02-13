@@ -1,1 +1,14 @@
-- set
+# quick and dirty on a sunday 
+
+- hosts: cumulus-nodes
+  name: cleanup
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: setting the host names
+      copy:
+        src: /home/ubuntu/ON-17/step-00/{{ inventory_hostname }}.yaml
+        dest: /etc/nvue.d/startup.yaml
+    # aktivieren
+    - name: apply
+      shell:  nv config apply startup -y
