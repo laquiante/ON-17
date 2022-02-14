@@ -6,7 +6,9 @@
             '10':
               vni:
                 '10': {}
-            '74': {}
+            '74':
+              vni:
+                '74': {}
     evpn:
       enable: on
     nve:
@@ -83,7 +85,7 @@
         type: loopback
       swp1:
         description: to spine13
-      swp1-2,4,8:
+      swp1-2,4,7-8:
         type: swp
       swp2:
         description: to spine14
@@ -110,6 +112,13 @@
             172.16.22.2/30: {}
           vrf: vrf22
         vlan: 22
+      swp7:
+        bridge:
+          domain:
+            br_default:
+              untagged: none
+              vlan:
+                '74': {}
       swp8:
         bridge:
           domain:
