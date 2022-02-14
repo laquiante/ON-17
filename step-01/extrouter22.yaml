@@ -21,7 +21,7 @@
           bgp:
             enable: on
             neighbor:
-              172.16.20.6:
+              172.16.20.5:
                 remote-as: external
                 type: numbered
         table: auto
@@ -30,7 +30,7 @@
           bgp:
             enable: on
             neighbor:
-              172.16.20.7:
+              172.16.20.5:
                 remote-as: external
                 type: numbered
         table: auto
