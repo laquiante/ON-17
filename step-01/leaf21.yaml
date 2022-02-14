@@ -55,18 +55,39 @@
           ip:
             address:
               10.0.120.1/24: {}
+        router:
+          bgp:
+            enable: on
+            neighbor:
+              172.16.20.6:
+                remote-as: external
+                type: numbered
         table: auto
       vrf21:
         loopback:
           ip:
             address:
               10.0.121.1/24: {}
+        router:
+          bgp:
+            enable: on
+            neighbor:
+              172.16.21.6:
+                remote-as: external
+                type: numbered
         table: auto
       vrf22:
         loopback:
           ip:
             address:
               10.0.122.1/24: {}
+        router:
+          bgp:
+            enable: on
+            neighbor:
+              172.16.22.6:
+                remote-as: external
+                type: numbered
         table: auto
     interface:
       lo:
