@@ -10,6 +10,8 @@
         autonomous-system: 65111
         enable: on
         router-id: 172.16.100.11
+      vrr:
+        enable: on
     system:
       hostname: leaf11
     vrf:
@@ -64,7 +66,7 @@
         type: loopback
       swp1:
         description: to spine13
-      swp1-2,4:
+      swp1-2,4,8:
         type: swp
       swp2:
         description: to spine14
@@ -91,3 +93,19 @@
             172.16.22.2/30: {}
           vrf: vrf22
         vlan: 22
+      swp8:
+        bridge:
+          domain:
+            br_default:
+              access: 10
+      vlan10:
+        ip:
+          address:
+            172.16.10.252/24: {}
+          vrr:
+            address:
+              172.16.10.254/24: {}
+            enable: on
+            mac-address: 00:00:00:00:00:0A
+        type: svi
+        vlan: 10
