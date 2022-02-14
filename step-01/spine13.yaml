@@ -32,6 +32,9 @@
                 remote-as: external
                 type: unnumbered
               swp5:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
                 remote-as: external
                 type: unnumbered
     interface:
