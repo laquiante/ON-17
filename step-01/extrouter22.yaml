@@ -1,4 +1,63 @@
-      
 - set:
+    router:
+      bgp:
+        autonomous-system: 65022
+        enable: on
+        router-id: 172.16.111.22
     system:
       hostname: extrouter22
+    vrf:
+      vrf20:
+        router:
+          bgp:
+            enable: on
+            neighbor:
+              172.16.20.5:
+                remote-as: external
+                type: numbered
+        table: auto
+      vrf21:
+        router:
+          bgp:
+            enable: on
+            neighbor:
+              172.16.20.6:
+                remote-as: external
+                type: numbered
+        table: auto
+      vrf22:
+        router:
+          bgp:
+            enable: on
+            neighbor:
+              172.16.20.7:
+                remote-as: external
+                type: numbered
+        table: auto
+    interface:
+      lo:
+        ip:
+          address:
+            172.16.111.22/32: {}
+        type: loopback
+      swp1.20-22:
+        base-interface: swp1
+        type: sub
+      swp1.20:
+        ip:
+          address:
+            172.16.20.6/30: {}
+          vrf: vrf20
+        vlan: 20
+      swp1.21:
+        ip:
+          address:
+            172.16.21.6/30: {}
+          vrf: vrf21
+        vlan: 21
+      swp1.22:
+        ip:
+          address:
+            172.16.22.6/30: {}
+          vrf: vrf22
+        vlan: 22
