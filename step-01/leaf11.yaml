@@ -3,8 +3,17 @@
       domain:
         br_default:
           vlan:
-            '10': {}
+            '10':
+              vni:
+                '10': {}
             '74': {}
+    evpn:
+      enable: on
+    nve:
+      vxlan:
+        enable: on
+        source:
+          address: 172.16.100.11
     router:
       bgp:
         autonomous-system: 65111
@@ -23,12 +32,20 @@
                 enable: on
                 network:
                   172.16.100.11/32: {}
+              l2vpn-evpn:
+                enable: on
             enable: on
             neighbor:
               swp1:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
                 remote-as: external
                 type: unnumbered
               swp2:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
                 remote-as: external
                 type: unnumbered
       vrf20:
