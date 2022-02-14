@@ -1,15 +1,4 @@
 - set:
-    interface:
-      lo:
-        ip:
-          address:
-            172.16.174.11/32: {}
-        type: loopback
-      swp1:
-        ip:
-          address:
-            172.16.74.1/30: {}
-        type: swp
     router:
       bgp:
         autonomous-system: 65174
@@ -31,3 +20,23 @@
               172.16.74.2:
                 remote-as: external
                 type: numbered
+    interface:
+      lo:
+        ip:
+          address:
+            172.16.174.11/32: {}
+        type: loopback
+      swp1:
+        bridge:
+          domain:
+            br_default:
+              untagged: none
+              vlan:
+                '74': {}
+        type: swp
+      vlan74:
+        ip:
+          address:
+            172.16.74.1/30: {}
+        type: svi
+        vlan: 74
