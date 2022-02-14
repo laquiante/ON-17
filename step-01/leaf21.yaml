@@ -21,6 +21,8 @@
         autonomous-system: 65121
         enable: on
         router-id: 172.16.100.21
+      vrr:
+        enable: on
     system:
       hostname: leaf21
     vrf:
@@ -48,6 +50,24 @@
                     enable: on
                 remote-as: external
                 type: unnumbered
+      vrf20:
+        loopback:
+          ip:
+            address:
+              10.0.120.1/24: {}
+        table: auto
+      vrf21:
+        loopback:
+          ip:
+            address:
+              10.0.121.1/24: {}
+        table: auto
+      vrf22:
+        loopback:
+          ip:
+            address:
+              10.0.122.1/24: {}
+        table: auto
     interface:
       lo:
         ip:
@@ -56,7 +76,11 @@
         type: loopback
       swp1-2,4,7-8:
         type: swp
-      swp4,7:
+      swp4:
+        bridge:
+          domain:
+            br_default: {}
+      swp7:
         bridge:
           domain:
             br_deault: {}
@@ -65,20 +89,33 @@
           domain:
             br_default:
               access: 10
+      vlan10:
+        ip:
+          address:
+            172.16.10.250/24: {}
+          vrr:
+            address:
+              172.16.10.254/24: {}
+            enable: on
+            mac-address: 00:00:00:00:00:0A
+        vlan: 10
+      vlan10,20-22:
+        type: svi
       vlan20:
         ip:
           address:
             172.16.20.5/30: {}
+          vrf: vrf20
         vlan: 20
-      vlan20-22:
-        type: svi
       vlan21:
         ip:
           address:
             172.16.21.5/30: {}
+          vrf: vrf21
         vlan: 21
       vlan22:
         ip:
           address:
             172.16.22.5/30: {}
+          vrf: vrf22
         vlan: 22
