@@ -1,7 +1,60 @@
 - set:
+    bridge:
+      domain:
+        br_default:
+          vlan:
+            '10':
+              vni:
+                '10': {}
+    evpn:
+      enable: on
+    nve:
+      vxlan:
+        enable: on
+        source:
+          address: 172.16.100.12
+    router:
+      bgp:
+        autonomous-system: 65112
+        enable: on
+        router-id: 172.16.100.12
     system:
       hostname: leaf12
+    vrf:
+      default:
+        router:
+          bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  172.16.100.12/32: {}
+              l2vpn-evpn:
+                enable: on
+            enable: on
+            neighbor:
+              swp1:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
+                remote-as: external
+                type: unnumbered
+              swp2:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
+                remote-as: external
+                type: unnumbered
     interface:
-      swp1-2,8:
+      lo:
+        ip:
+          address:
+            172.16.100.12/32: {}
+        type: loopback
+      swp1-2,9:
         type: swp
-       
+      swp9:
+        bridge:
+          domain:
+            br_default:
+              access: 10
