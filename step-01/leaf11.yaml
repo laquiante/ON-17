@@ -11,6 +11,8 @@
                 '74': {}
     evpn:
       enable: on
+      multihoming:
+        enable: on
     nve:
       vxlan:
         enable: on
@@ -50,7 +52,16 @@
                     enable: on
                 remote-as: external
                 type: unnumbered
+          static: {}
       vrf20:
+        evpn:
+          enable: on
+          vni:
+            '4020': {}
+        loopback:
+          ip:
+            address:
+              10.0.120.1/32: {}
         router:
           bgp:
             enable: on
@@ -78,6 +89,21 @@
                 type: numbered
         table: auto
     interface:
+      bond1:
+        bond:
+          member:
+            swp8: {}
+        bridge:
+          domain:
+            br_default:
+              access: 10
+        evpn:
+          multihoming:
+            segment:
+              enable: on
+              local-id: 1
+              mac-address: 44:38:39:AB:CD:0A
+        type: bond
       lo:
         ip:
           address:
@@ -85,7 +111,11 @@
         type: loopback
       swp1:
         description: to spine13
-      swp1-2,4,7-8:
+      swp1-2:
+        evpn:
+          multihoming:
+            uplink: on
+      swp1-2,4,7:
         type: swp
       swp2:
         description: to spine14
@@ -119,11 +149,6 @@
               untagged: none
               vlan:
                 '74': {}
-      swp8:
-        bridge:
-          domain:
-            br_default:
-              access: 10
       vlan10:
         ip:
           address:
