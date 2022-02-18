@@ -1,0 +1,34 @@
+- set:
+    router:
+      bgp:
+        autonomous-system: 65102
+        enable: on
+        router-id: 172.16.100.24
+    vrf:
+      default:
+        router:
+          bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  172.16.100.24/32: {}
+            enable: on
+            neighbor:
+              swp1:
+                remote-as: external
+                type: unnumbered
+              swp2:
+                remote-as: external
+                type: unnumbered
+              swp5:
+                remote-as: external
+                type: unnumbered
+    interface:
+      lo:
+        ip:
+          address:
+            172.16.100.24/32: {}
+        type: loopback
+      swp1-2,5:
+        type: swp
