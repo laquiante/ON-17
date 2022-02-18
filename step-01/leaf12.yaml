@@ -4,6 +4,8 @@
         autonomous-system: 65112
         enable: on
         router-id: 172.16.100.12
+      vrr:
+        enable: on
     system:
       hostname: leaf12
     vrf:
@@ -36,3 +38,14 @@
           domain:
             br_default:
               access: 10
+      vlan10:
+        ip:
+          address:
+            172.16.10.253/24: {}
+          vrr:
+            address:
+              172.16.10.254/24: {}
+            enable: on
+            mac-address: 00:00:00:00:00:0A
+        type: svi
+        vlan: 10
