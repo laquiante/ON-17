@@ -1,0 +1,95 @@
+- set:
+    bridge:
+      domain:
+        br_default:
+          vlan:
+            '10':
+              vni:
+                '10': {}
+            '20':
+              vni:
+                '20': {}
+    evpn:
+      enable: on
+    nve:
+      vxlan:
+        enable: on
+        source:
+          address: 172.16.100.21
+    router:
+      bgp:
+        autonomous-system: 65121
+        enable: on
+        router-id: 172.16.100.21
+      vrr:
+        enable: on
+    system:
+      hostname: leaf21
+    vrf:
+      default:
+        router:
+          bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  172.16.100.21/32: {}
+              l2vpn-evpn:
+                enable: on
+            enable: on
+            neighbor:
+              swp1:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
+                remote-as: external
+                type: unnumbered
+              swp2:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
+                remote-as: external
+                type: unnumbered
+      tenant01:
+        evpn:
+          enable: on
+          vni:
+            '4000': {}
+    interface:
+      lo:
+        ip:
+          address:
+            172.16.100.21/32: {}
+        type: loopback
+      swp1-2,4,8:
+        type: swp
+      swp4:
+        bridge:
+          domain:
+            br_default:
+              vlan:
+                '20': {}
+      swp8:
+        bridge:
+          domain:
+            br_default:
+              access: 10
+      vlan10:
+        ip:
+          address:
+            172.16.10.250/24: {}
+          vrr:
+            address:
+              172.16.10.254/24: {}
+            enable: on
+            mac-address: 00:00:00:00:00:0A
+        vlan: 10
+      vlan10,20:
+        ip:
+          vrf: tenant01
+        type: svi
+      vlan20:
+        ip:
+          address:
+            172.16.20.5/30: {}
+        vlan: 20
