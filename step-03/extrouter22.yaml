@@ -1,0 +1,23 @@
+- set:
+    system:
+      hostname: extrouter22
+    vrf:
+      default:
+        router:
+          static:
+            172.16.0.0/16:
+              address-family: ipv4-unicast
+              via:
+                172.16.20.5:
+                  type: ipv4-address
+    interface:
+      swp1:
+        ip:
+          address: {}
+        type: swp
+      swp1.20:
+        base-interface: swp1
+        ip:
+          address:
+            172.16.20.6/30: {}
+        type: sub
