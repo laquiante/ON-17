@@ -1,0 +1,41 @@
+- set:
+    router:
+      bgp:
+        autonomous-system: 4200000000
+        enable: on
+        router-id: 172.16.142.2
+    vrf:
+      default:
+        router:
+          bgp:
+            enable: on
+            neighbor:
+              10.0.0.0:
+                remote-as: internal
+                type: numbered
+              192.168.42.13:
+                remote-as: external
+                type: numbered
+              192.168.42.9:
+                remote-as: external
+                type: numbered
+    interface:
+      lo:
+        ip:
+          address:
+            172.16.142.2/32: {}
+        type: loopback
+      swp1:
+        ip:
+          address:
+            10.0.0.1/31: {}
+      swp1,14,24:
+        type: swp
+      swp14:
+        ip:
+          address:
+            192.168.42.10/30: {}
+      swp24:
+        ip:
+          address:
+            192.168.42.14/30: {}
