@@ -1,0 +1,54 @@
+- set:
+    router:
+      bgp:
+        autonomous-system: 65102
+        enable: on
+        router-id: 172.16.100.24
+    system:
+      hostname: spine24
+    vrf:
+      default:
+        router:
+          bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  172.16.100.24/32: {}
+              l2vpn-evpn:
+                enable: on
+            enable: on
+            neighbor:
+              192.168.42.14:
+                remote-as: external
+                type: numbered
+              swp1:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
+                remote-as: external
+                type: unnumbered
+              swp2:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
+                remote-as: external
+                type: unnumbered
+              swp5:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
+                remote-as: external
+                type: unnumbered
+    interface:
+      lo:
+        ip:
+          address:
+            172.16.100.24/32: {}
+        type: loopback
+      swp1-2,4-5:
+        type: swp
+      swp4:
+        ip:
+          address:
+            192.168.42.13/30: {}
