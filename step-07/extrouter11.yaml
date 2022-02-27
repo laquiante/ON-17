@@ -1,0 +1,30 @@
+- set:
+    router:
+      bgp:
+        autonomous-system: 65011
+        enable: on
+        router-id: 172.16.100.11
+    system:
+      hostname: extrouter11
+    vrf:
+      tenant21: {}
+      tenant22: {}
+    interface:
+      lo:
+        ip:
+          address:
+            172.16.100.11/32: {}
+        type: loopback
+      swp1.21-22:
+        base-interface: swp1
+        type: sub
+      swp1.21:
+        ip:
+          address:
+            172.16.21.1/30: {}
+        vlan: 21
+      swp1.22:
+        ip:
+          address:
+            172.16.22.1/30: {}
+        vlan: 22
