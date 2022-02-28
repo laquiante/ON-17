@@ -3,21 +3,39 @@
       bgp:
         autonomous-system: 65011
         enable: on
-        router-id: 172.16.100.11
+        router-id: 172.16.111.11
     system:
       hostname: extrouter11
     vrf:
       tenant21:
+        loopback:
+          ip:
+            address:
+              10.0.21.1/32: {}
         router:
           bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  10.0.21.1/32: {}
             enable: on
             neighbor:
               172.16.21.2:
                 remote-as: external
                 type: numbered
       tenant22:
+        loopback:
+          ip:
+            address:
+              10.0.22.1/32: {}
         router:
           bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  10.0.22.1/32: {}
             enable: on
             neighbor:
               172.16.22.2:
@@ -27,7 +45,7 @@
       lo:
         ip:
           address:
-            172.16.100.11/32: {}
+            172.16.111.11/32: {}
         type: loopback
       swp1.21-22:
         base-interface: swp1
