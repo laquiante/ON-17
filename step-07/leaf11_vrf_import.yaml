@@ -3,6 +3,9 @@
       config:
         snippet:
           frr.conf: |
+            router bgp 65111
+              address-family ipv4 unicast
+                import vrf tenant21
             router bgp 65111 vrf tenant21
               address-family ipv4 unicast
                 import vrf default
