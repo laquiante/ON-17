@@ -103,6 +103,9 @@
             address-family:
               ipv4-unicast:
                 enable: on
+                redistribute:
+                  connected:
+                    enable: on
                 route-export:
                   to-evpn:
                     enable: on
