@@ -6,6 +6,11 @@
             '10':
               vni:
                 '10': {}
+            '20': {}
+            '21':
+              vni:
+                '21': {}
+            '22': {}
             '74':
               vni:
                 '74': {}
@@ -26,11 +31,6 @@
       vrr:
         enable: on
     system:
-      config:
-        snippet:
-          frr.conf: "router bgp 65111\n  address-family ipv4 unicast\n    import vrf\
-            \ tenant21\nrouter bgp 65111 vrf tenant21\n  address-family ipv4 unicast\n\
-            \    import vrf default\n"
       hostname: leaf11
     vrf:
       default:
@@ -71,38 +71,43 @@
           enable: on
           vni:
             '4021': {}
-        loopback:
-          ip:
-            address:
-              172.16.121.11/32: {}
         router:
           bgp:
             address-family:
               ipv4-unicast:
                 enable: on
-                network:
-                  172.16.121.11/32: {}
+                redistribute:
+                  connected:
+                    enable: on
+                route-export:
+                  to-evpn:
+                    enable: on
+              l2vpn-evpn:
+                enable: on
             enable: on
             neighbor:
               172.16.21.1:
                 remote-as: external
                 type: numbered
+            route-export:
+              to-evpn:
+                route-target:
+                  auto: {}
       tenant22:
         evpn:
           enable: on
           vni:
             '4022': {}
-        loopback:
-          ip:
-            address:
-              172.16.122.11/32: {}
         router:
           bgp:
             address-family:
               ipv4-unicast:
                 enable: on
-                network:
-                  172.16.122.11/32: {}
+                route-export:
+                  to-evpn:
+                    enable: on
+              l2vpn-evpn:
+                enable: on
             enable: on
             neighbor:
               172.16.22.1:
@@ -134,8 +139,12 @@
         evpn:
           multihoming:
             uplink: on
-      swp1-2,7:
+      swp1-2,4,7:
         type: swp
+      swp4:
+        bridge:
+          domain:
+            br_default: {}
       swp4.21-22:
         base-interface: swp4
         type: sub
