@@ -1,0 +1,98 @@
+- set:
+    bridge:
+      domain:
+        br_default:
+          vlan:
+            '10':
+              vni:
+                '10': {}
+            '74':
+              vni:
+                '74': {}
+    evpn:
+      enable: on
+      multihoming:
+        enable: on
+    nve:
+      vxlan:
+        enable: on
+        source:
+          address: 172.16.100.22
+    router:
+      bgp:
+        autonomous-system: 65122
+        enable: on
+        router-id: 172.16.100.22
+      vrr:
+        enable: on
+    system:
+      hostname: leaf22
+    vrf:
+      default:
+        router:
+          bgp:
+            address-family:
+              ipv4-unicast:
+                enable: on
+                network:
+                  172.16.100.22/32: {}
+              l2vpn-evpn:
+                enable: on
+            enable: on
+            neighbor:
+              swp1:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
+                remote-as: external
+                type: unnumbered
+              swp2:
+                address-family:
+                  l2vpn-evpn:
+                    enable: on
+                remote-as: external
+                type: unnumbered
+    interface:
+      bond01:
+        bond:
+          member:
+            swp9: {}
+        bridge:
+          domain:
+            br_default:
+              access: 10
+        evpn:
+          multihoming:
+            segment:
+              df-preference: 4000
+              enable: on
+              local-id: 2
+              mac-address: 44:38:39:AB:CD:0A
+        type: bond
+      lo:
+        ip:
+          address:
+            172.16.100.22/32: {}
+        type: loopback
+      swp1-2:
+        evpn:
+          multihoming:
+            uplink: on
+      swp1-2,7:
+        type: swp
+      swp7:
+        bridge:
+          domain:
+            br_default:
+              access: 74
+      vlan10:
+        ip:
+          address:
+            172.16.10.251/24: {}
+          vrr:
+            address:
+              172.16.10.254/24: {}
+            enable: on
+            mac-address: 00:00:00:00:00:0A
+        type: svi
+        vlan: 10
