@@ -28,11 +28,6 @@
       vrr:
         enable: on
     system:
-      config:
-        snippet:
-          frr.conf: "router bgp 65121\n  address-family ipv4 unicast\n    import vrf\
-            \ tenant21\nrouter bgp 65121 vrf tenant21\n  address-family ipv4 unicast\n\
-            \    import vrf default\n"
       hostname: leaf21
     vrf:
       default:
@@ -74,14 +69,20 @@
             address-family:
               ipv4-unicast:
                 enable: on
-                route-export:
-                  to-evpn:
+                redistribute:
+                  connected:
                     enable: on
+              l2vpn-evpn:
+                enable: on
             enable: on
             neighbor:
               172.16.21.6:
                 remote-as: external
                 type: numbered
+            route-export:
+              to-evpn:
+                route-target:
+                  auto: {}
       tenant22:
         evpn:
           enable: on
@@ -128,8 +129,6 @@
             br_default:
               vlan:
                 '20': {}
-                '21': {}
-                '22': {}
       vlan10:
         ip:
           address:
